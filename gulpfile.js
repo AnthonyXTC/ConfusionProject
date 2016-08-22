@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     changed = require('gulp-changed'),
     rev = require('gulp-rev'),
-    ngannotate = require('angular-ng-annotate'),
+    ngannotate = require('gulp-ng-annotate'),
     browserSync = require('browser-sync'),
     del = require('del');
 
