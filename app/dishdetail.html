@@ -26,21 +26,21 @@
 <body>
 <!--Container-->
     <div class="container">
-        <div class="row row-content" ng-controller="dishDetailController as detailCtrl">
+        <div class="row row-content" ng-cloak="" ng-controller="DishDetailController">
             <div class="col-xs-12">
                 <!--media object-->
                     <div class="media">
                         <div class="media-left media-middle">
                             <a href="">
-                                <img ng-src="{{detailCtrl.dish.image}}" src="" alt="" class="media-object img-thumbnail">
+                                <img ng-src="{{dish.image}}" src="" alt="" class="media-object img-thumbnail">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h2 class="media-heading">{{detailCtrl.dish.name}}
-                                <span class="label label-danger">{{detailCtrl.dish.label}}</span>
-                                <span class="badge">{{detailCtrl.dish.price | currency}}</span>
+                            <h2 class="media-heading">{{dish.name}}
+                                <span class="label label-danger">{{dish.label}}</span>
+                                <span class="badge">{{dish.price | currency}}</span>
                             </h2>
-                            <p>{{detailCtrl.dish.description}}</p>
+                            <p>{{dish.description}}</p>
                         </div>
                     </div>
                 <!--/media object-->
@@ -50,71 +50,81 @@
                 <small>Sort by:</small>
                 <input type="text" ng-model="detailCtrl.typeFilter">
                 <!--blockquotes-->
-                <blockquote ng-repeat="comment in detailCtrl.dish.comments | orderBy:detailCtrl.typeFilter">
+                <blockquote ng-repeat="comment in dish.comments | orderBy:typeFilter">
                     <p>{{comment.rating}} Stars</p>
                     <p>{{comment.comment}}</p>
                     <footer>{{comment.author}}, {{comment.date | date}}</footer>
                 </blockquote>
                 <!--/blockquotes-->
             </div>
-        </div>
+            <!--ASSIGNMENT-->
+            <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
+                <!--Comments Live Preview-->
+                <blockquote>
+                    <p>{{ccomment.rating}} Stars</p>
+                    <p>{{ccomment.comment}}</p>
+                    <footer>{{ccomment.author}}, {{ccomment.date | date}}</footer>
+                </blockquote>
 
+                <!--Form-->
+                <form action="" class="form-horizontal"
+                      ng-submit="pushComment()"
+                      name="commentForm"
+                      id="commentForm"
+                      novalidate
+                    >
+
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <!--Author name-->
+                        <input
+                                id="name" name="name" type="text"
+                                placeholder="Enter your Name" class="form-control"
+                                ng-model="ccomment.author"
+
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class=" " for="stars">Number of stars</label>
+
+                        <label class="radio-inline">
+                            <input ng-model="ccomment.rating" class="" type="radio" name="stars" id="stars" value="1"> 1
+                        </label>
+                        <label class="radio-inline">
+                            <input ng-model="ccomment.rating" class="" type="radio" name="stars" id="stars" value="2"> 2
+                        </label>
+                        <label class="radio-inline">
+                            <input ng-model="ccomment.rating" class="" type="radio" name="stars" id="stars" value="3"> 3
+                        </label>
+                        <label class="radio-inline">
+                            <input ng-model="ccomment.rating" class="" type="radio" name="stars" id="stars" value="4"> 4
+                        </label>
+                        <label class="radio-inline">
+                            <input ng-model="ccomment.rating" class="" type="radio" name="stars" id="stars" value="5" > 5
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comment">Your Comments</label>
+                        <textarea ng-model="ccomment.comment" class="form-control" name="comment" id="comment" cols="30" rows="12"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">
+                            Submit Comment
+                        </button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
     </div>
 
     <script src="../bower_components/angular/angular.min.js"></script>
-    <script>
-
-        var app = angular.module('confusionApp',[]);
-        
-        app.controller('dishDetailController', function() {
-            this.typeFilter = "";
-            var dish={
-                          name:'Uthapizza',
-                          image: 'images/uthapizza.png',
-                          category: 'mains', 
-                          label:'Hot',
-                          price:'4.99',
-                          description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',
-                           comments: [
-                               {
-                                   rating:5,
-                                   comment:"Imagine all the eatables, living in conFusion!",
-                                   author:"John Lemon",
-                                   date:"2012-10-16T17:57:28.556094Z"
-                               },
-                               {
-                                   rating:4,
-                                   comment:"Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-                                   author:"Paul McVites",
-                                   date:"2014-09-05T17:57:28.556094Z"
-                               },
-                               {
-                                   rating:3,
-                                   comment:"Eat it, just eat it!",
-                                   author:"Michael Jaikishan",
-                                   date:"2015-02-13T17:57:28.556094Z"
-                               },
-                               {
-                                   rating:4,
-                                   comment:"Ultimate, Reaching for the stars!",
-                                   author:"Ringo Starry",
-                                   date:"2013-12-02T17:57:28.556094Z"
-                               },
-                               {
-                                   rating:2,
-                                   comment:"It's your birthday, we're gonna party!",
-                                   author:"25 Cent",
-                                   date:"2011-12-02T17:57:28.556094Z"
-                               }
-                               
-                           ]
-                    };
-            
-            this.dish = dish;
-
-        });
-
-    </script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/services.js"></script>
 
 </body>
 

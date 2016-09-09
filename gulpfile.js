@@ -1,5 +1,5 @@
 
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
@@ -78,7 +78,7 @@ gulp.task('browser-sync', ['default'], function () {
     browserSync.init(files, {
         server: {
             baseDir: "dist",
-            index: "contactus.html"
+            index: "index.html"
         }
     });
 

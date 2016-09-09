@@ -79,7 +79,12 @@
             </div>
         </div>
     </header>
-    
+    <!--Main Container (Templates)-->
+    <!--<div ng-include="'menu.html'"></div>-->
+    <!--<div ng-include="'contactus.html'"></div>-->
+    <!--<div ng-include="'dishdetail.html'"></div>-->
+    <ng-view></ng-view>
+    <!--/Main Container-->
     <footer class="row-footer">
         <div class="container">
             <div class="row">             
@@ -125,6 +130,7 @@
 
 <!-- build:js scripts/main.js -->
     <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers.js"></script>
     <script src="scripts/services.js"></script>
